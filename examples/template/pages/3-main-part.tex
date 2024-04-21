@@ -1,0 +1,52 @@
+\chapter{Название главы}
+  \section{Названия секции}
+    \subsubsection{Название подсекции}
+      \paragraph{Название параграфа}
+        \subparagraph{Название подпараграфа}
+          \lipsum[2]\cite{BibExampleRU}
+          \begin{center}
+            \begin{xltabular}{\linewidth}{|l|X|}
+              \caption{Long table caption.\label{long}}                                                                                                    \\
+              \hline
+              Столбик1  & Столбик2    \\
+              \hline
+              слово     & Слово       \\
+              \hline
+            \end{xltabular}
+          \end{center}
+
+
+\chapter{Название главы}
+  \section{Названия секции}
+    \subsubsection{Название подсекции}
+      \paragraph{Название Параграфа}
+        \lipsum[2]\cite{BibExampleRU}
+        Как видно на \refImg{img:test} или на \refAppendix{appendix:example}
+        \fig[Длинное название картинки из примера][0.5][img:test]{assets/example.drawio.png}
+
+        \begin{center}
+          \begin{xltabular}{\linewidth}{|l|X|}
+            \caption{Long table caption.\label{long}}                                                                                                    \\
+            \hline
+            Столбик1  & Столбик2    \\
+            \hline
+            слово     & Слово       \\
+            \hline
+          \end{xltabular}
+        \end{center}
+
+        \begin{lstlisting}[caption={Название листинга}]
+begin
+  print('Hellow world!')
+end
+        \end{lstlisting}
+
+        \begin{itemize}
+          \item item1
+          \item item2
+        \end{itemize}
+
+        \begin{enumerate}
+          \item item1
+          \item item2
+        \end{enumerate}

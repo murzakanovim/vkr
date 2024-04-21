@@ -1,0 +1,226 @@
+\documentclass[a4paper,14pt]{extreport}
+\usepackage[left=30mm,right=10mm,top=20mm,bottom=20mm]{geometry}
+\parindent 1.25cm
+\linespread{1.5}
+
+\usepackage{cmap}
+\usepackage{lipsum}  
+\usepackage{chngcntr}\counterwithout{table}{chapter}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage[english,russian]{babel}
+\usepackage{fontspec}
+\setmainfont{Times New Roman}
+
+\usepackage{indentfirst}
+
+\usepackage[backend=biber,style=gost-numeric]{biblatex}
+\addbibresource{biblio.bib}
+
+\usepackage{multicol}
+\usepackage{listings}
+\usepackage{graphicx}
+\graphicspath{ {assets/} }
+\usepackage{placeins}
+\usepackage{multirow}
+\usepackage{paralist}
+\usepackage{float}
+
+\usepackage{longtable}
+\usepackage{makecell}
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+\usepackage{caption, subcaption}
+\captionsetup[table]{justification=raggedright,singlelinecheck=false}
+
+\usepackage{xltabular, tabularx}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt} 
+\fancyhf{}
+\fancyfoot[C]{\thepage}
+
+\fancypagestyle{plain} {
+	\renewcommand{\headrulewidth}{0pt}
+	\fancyhf{}
+  \fancyfoot[C]{\thepage}
+}
+
+\usepackage{titletoc, amsmath, lastpage} %подключаем нужные пакеты расширений
+\usepackage[raggedright]{titlesec} % не переносить заголовки
+
+\titleformat{\chapter}[block]{\centering\Large\bfseries}{\MakeUppercase{\chaptertitlename}\ \thechapter . }{0pt}{\MakeUppercase}
+\titlespacing{\chapter}{0pt}{10pt}{6pt}
+
+\titleformat{\section}[block]{\centering\Large\bfseries}{\thesection . }{0pt}{}
+\titlespacing{\section}{0pt}{10pt}{3pt}
+
+\titleformat{\subsection}[block]{\centering\Large\bfseries\itshape}{\thesubsection . }{0pt}{}
+
+\titleformat{\subsubsection}[block]{\centering\itshape}{\thesubsubsection . }{0pt}{}
+
+\titleformat{\paragraph}[block]{\bfseries}{\theparagraph .}{0pt}{}
+\titlespacing{\paragraph}{0pt}{10pt}{0pt}
+
+
+% TABLE OF CONTENT CONFIG
+\usepackage{tocloft} 
+
+% disables bold in table of content
+\newcommand*{\disableboldchapterintoc}{%
+	\addtocontents{toc}{\string\renewcommand{\protect\cftchappagefont}{\protect\normalfont}}
+	\addtocontents{toc}{\string\renewcommand{\protect\cftchapfont}{\protect\normalfont}}
+	\addtocontents{toc}{\string\renewcommand{\protect\cftchapleader}{\protect\normalfont\protect\cftdotfill{\protect\cftsecdotsep}}}% 
+}
+
+\renewcommand{\cftaftertoctitle}{\hfill}
+
+\setlength{\cftchapindent}{0pt}
+\setlength{\cftsecindent}{0pt}
+\setlength{\cftsubsecindent}{0pt}
+\cftsetindents{section}{0pt}{1.0\baselineskip}
+\cftsetindents{chapter}{0pt}{1.0\baselineskip}
+
+\titlecontents{chapter}[0pt]{}{\chaptername\ \thecontentslabel. }{}{\cftdotfill{\cftsecdotsep}\contentspage}
+
+\titlelabel{\thetitle.\quad}
+
+\renewcommand{\cftdotsep}{1}
+
+\makeatletter
+\renewcommand\chapter{\par%
+  \thispagestyle{plain}%
+  \global\@topnum\z@
+  \@afterindentfalse
+  \secdef\@chapter\@schapter}
+\makeatother
+
+\makeatletter
+\renewcommand\large{\@setfontsize\large{14}{16}}
+\renewcommand\Large{\@setfontsize\Large{14}{16}}
+\renewcommand\Large{\@setfontsize\LARGE{14}{16}}
+\makeatother
+
+\usepackage{xargs}
+\newcommandx{\fig}[4][1=, 2=1, 3=]{
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=#2\textwidth]{#4}
+    \caption{#1}
+    \label{#3}
+  \end{figure}
+}
+
+\newcommand{\refAppendix}[1]{
+  (Приложение \ref{#1})
+}
+
+\newcommand{\refImg}[1]{
+  (рис. \ref{#1})
+}
+
+\usepackage{placeins} % floatbarrier
+\usepackage{setspace} %line spacing
+
+\usepackage{enumitem}
+\setlist[itemize]{noitemsep, topsep=0pt}
+\setlist[enumerate]{noitemsep, topsep=0pt}
+
+% Меняем везде перечисления на цифра.цифра
+\renewcommand{\theenumi}{\arabic{enumi}.}
+\renewcommand{\labelenumi}{\arabic{enumi}.}
+\renewcommand{\theenumii}{.\arabic{enumii}.}
+\renewcommand{\labelenumii}{\hspace*{1cm}\arabic{enumi}.\arabic{enumii}.}
+\renewcommand{\theenumiii}{.\arabic{enumiii}.}
+\renewcommand{\labelenumiii}{\arabic{enumi}.\arabic{enumii}.\arabic{enumiii}.}
+
+\renewcommand{\cellalign}{vh}
+\renewcommand{\theadalign}{vh}
+
+\newcommand{\chaperWONum}[1]{\chapter*{#1}\addcontentsline{toc}{chapter}{#1}}
+\renewcommand\thesubfigure{\asbuk{subfigure}}
+
+\lstset{ %
+language=java,                % выбор языка для подсветки (здесь это С)
+basicstyle=\small\sffamily,   % размер и начертание шрифта для подсветки кода
+numbers=left,                 % где поставить нумерацию строк (слева\справа)
+numberstyle=\tiny,            % размер шрифта для номеров строк
+stepnumber=1,                 % размер шага между двумя номерами строк
+firstnumber=1,
+numberfirstline=true
+numbersep=5pt,                % как далеко отстоят номера строк от подсвечиваемого кода
+backgroundcolor=\color{white},% цвет фона подсветки - используем \usepackage{color}
+showspaces=false,             % показывать или нет пробелы специальными отступами
+showstringspaces=false,       % показывать или нет пробелы в строках
+showtabs=false,               % показывать или нет табуляцию в строках
+frame=single,                 % рисовать рамку вокруг кода
+tabsize=2,                    % размер табуляции по умолчанию равен 2 пробелам
+captionpos=t,                 % позиция заголовка вверху [t] или внизу [b] 
+breaklines=true,              % автоматически переносить строки (да\нет)
+breakatwhitespace=false,      % переносить строки только если есть пробел
+escapeinside={\%*}{*)}        % если нужно добавить комментарии в коде
+}
+
+\input{custom-setup.tex}
+
+\begin{document}
+  \selectlanguage{russian}
+
+  \input{settings.tex}
+  \pagenumbering{gobble}
+
+  \begin{spacing}{1}
+    \input{pages/titlepage}
+  \end{spacing}
+
+
+  \newpage
+  \input{pages/task}
+
+  \newpage
+  \sloppy
+
+  \chapter*{Реферат}
+    \input{pages/1-referat-ru.tex}
+
+    \newpage
+  \chapter*{Abstract}
+    \begin{otherlanguage}{english}
+      \input{pages/1-referat-en.tex}
+    \end{otherlanguage}
+
+    \newpage
+    \disableboldchapterintoc
+    \renewcommand{\contentsname}{\textbf{СОДЕРЖАНИЕ}}
+    \renewcommand{\cfttoctitlefont}{\hfill\Large}
+
+    \tableofcontents
+    \newpage
+
+    \pagenumbering{arabic}
+    \setcounter{page}{6}
+
+    % введение
+    \chaperWONum{Введение}
+    \input{pages/2-introduction.tex}
+
+    \input{pages/3-main-part.tex}
+
+    \chaperWONum{Заключение}
+    \input{pages/4-conclusion.tex}
+
+
+
+    \newpage
+    \chaperWONum{Список источников}
+    \printbibliography[heading=none]
+
+    \newpage
+    \appendix
+    \renewcommand{\thechapter}{\Asbuk{chapter}}
+    \addtocontents{toc}{\protect\renewcommand{\protect\chaptername}{Приложение}}
+    \input{pages/5-appendix.tex}
+
+\end{document}
